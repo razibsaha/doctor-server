@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 var nodemailer = require("nodemailer");
-const mg = require("nodemailer-mailgun-transport");
+// const mg = require("nodemailer-mailgun-transport");
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
@@ -43,7 +43,7 @@ const auth = {
   },
 };
 
-const nodemailerMailgun = nodemailer.createTransport(mg(auth));
+// const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 
 function sendAppointmentEmail(booking) {
   const { patient, patientName, treatment, date, slot } = booking;
@@ -66,13 +66,13 @@ function sendAppointmentEmail(booking) {
     `,
   };
 
-  nodemailerMailgun.sendMail(email, (err, info) => {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log(info);
-    }
-  });
+  // nodemailerMailgun.sendMail(email, (err, info) => {
+  //   if (err) {
+  //     console.log(err);
+  //   } else {
+  //     console.log(info);
+  //   }
+  // });
 }
 
 async function run() {
