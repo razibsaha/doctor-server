@@ -62,7 +62,6 @@ function sendAppointmentEmail(booking) {
         <h3>Our Address</h3>
         <p>Feni,Chittagong</p>
         <p>Bangladesh</p>
-        <a href="https://web.programming-hero.com/">unsubscribe</a>
       </div>
     `,
   };
@@ -79,12 +78,8 @@ function sendAppointmentEmail(booking) {
 async function run() {
   try {
     await client.connect();
-    const serviceCollection = client
-      .db("doctors_portal")
-      .collection("services");
-    const bookingCollection = client
-      .db("doctors_portal")
-      .collection("bookings");
+    const serviceCollection = client.db("doctors_portal").collection("services");
+    const bookingCollection = client.db("doctors_portal").collection("bookings");
     const userCollection = client.db("doctors_portal").collection("users");
     const doctorCollection = client.db("doctors_portal").collection("doctors");
     const paymentCollection = client.db('doctors_portal').collection('payments');
@@ -246,6 +241,7 @@ async function run() {
       const result = await doctorCollection.insertOne(doctor);
       res.send(result);
     });
+    
     app.patch('/booking/:id', verifyJWT, async(req, res) =>{
         const id  = req.params.id;
         const payment = req.body;
